@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfCustomControlItemToolTip.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WpfCustomControlItemToolTip"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Name="MainView"
+        Title="MainWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ElementName=MainView,
+                                            Path=Items}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:CustomItemsControl DisplayName="{Binding DisplayName}"
+                                              ItemsSource="{Binding SubItems}">
+                        <local:CustomItemsControl.ItemToolTipTemplate>
+                            <ControlTemplate>
+                                <TextBlock Text="{Binding Name,
+                                                          StringFormat=Tooltip: {0}}" />
+                            </ControlTemplate>
+                        </local:CustomItemsControl.ItemToolTipTemplate>
+                    </local:CustomItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>
